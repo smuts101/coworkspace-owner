@@ -1,0 +1,864 @@
+
+
+<ion-content>
+  <div  *ngIf="GallaryStatusValue==1" style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+    <div style="height: 100%;width: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;border-bottom-right-radius:10%" >
+  <div>
+  <ion-grid style="padding-top:10%;padding-bottom:10%;">
+  
+      <ion-row><h1 style="font-family: Arial, Helvetica, sans-serif;color:#1E3D58 ;">Gallary</h1></ion-row>
+ 
+    </ion-grid>
+  </div>
+      <div style="border:1px solid white;bottom:0%;;position:relative;height: 80%;overflow: scroll;">
+        <ion-grid  style="width: 100%;">
+          <ion-row>
+          </ion-row>
+          <ion-row>
+              <ion-col >
+                <ion-input  type="file"  required  *ngIf="this.gallaryArraySize < 4"  name="img"  accept="image/*" id="upload" (change)="onselect($event)" style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+              </ion-col>
+          </ion-row>
+          <ion-row>
+            <div>
+              <div  style="color:red;" *ngIf=" this.imageError!==''">{{this.imageError}}</div>
+            </div>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div style="margin-top:5%;" >
+                <ion-button    (click)="uploadGallary()"  style="width: 100%;">Submit</ion-button>
+               </div>
+            </ion-col>
+            <ion-col>
+              <div style="margin-top:5%;" >
+                <ion-button    (click)="closeGallary()" color="danger"  style="width: 100%;">Close</ion-button>
+               </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <div style="height: 200px;overflow: scroll;">
+                <img style="width:100%;" *ngFor="let url of urls" [src]="url">
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </div>
+   </div> 
+  
+  <div *ngIf="showProfile==0" style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+    <div style="height: 100%;width: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;" >
+  <div >
+    
+    <ion-grid style="padding-top:10%;padding-bottom:0%;">
+      <ion-row>
+        <ion-buttons style="color:#1E3D58" >
+          <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+      </ion-row>
+      <ion-row><h1 style="font-family: Arial, Helvetica, sans-serif;color:#1E3D58 ;">WorkSPace</h1></ion-row>
+    </ion-grid>
+  </div>
+      <div style="border:1px solid white;bottom:0%;;position:relative;width:100%;height: 75%;overflow: scroll;position: relative;">
+          <ion-card   *ngFor="let x of arrayList" style="width:100%;left: 0;margin: 0%;border-bottom: 2px solid rgb(153, 156, 153);">
+            <img  style="width:100%;height: 270px;" [src]="x.image" />
+            <div style="position: relative;bottom:18px;z-index: 1;width:100%;">
+              <ion-icon name="create-sharp"  (click)="EditForm(x.spaceuid)" name="create-outline" class="editing" style="background-color: #603F8B;border-radius: 100%;font-size:2em ;color: white;"></ion-icon>
+              <ion-icon name="trash-sharp" (click)="remove(x.spaceuid)" style="background-color: rgb(97, 17, 17);border-radius: 100%;font-size:2em ;margin-left:4%;color:white"></ion-icon>
+              <a style="position: absolute; right: 32%;font-size: 1em;padding-top:5%;color:green;" [routerLink] = "['/previews',x.uid,x.workspace_uid,x.spaceuid]">Previews</a> 
+              <a (click)="ShowchangeProfileImg()"  style="position: absolute; right: 2%;font-size: 1em;padding-top:5%;color:#603F8B;">Change Picture</a>
+            </div>
+            <ion-card-header>
+              <ion-card-title style="color:#1E3D58;font-weight: bold;">{{x.categories}}</ion-card-title>
+              <ion-card-subtitle>R{{x.price}}</ion-card-subtitle>
+              <ion-card-subtitle> {{x.address}}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+              {{x.description}}
+              <div>
+                <a (click)="ShowGoogleMaps()">Add space  address to Google Maps</a>
+              </div>
+              <div>
+                <a (click)="showExtra()">Add Extras</a>
+              </div>
+            </ion-card-content>
+
+            <ion-grid>
+              <ion-row style="text-align: center;color:#603F8B;font-weight: bold;">
+                <ion-col  >
+                 <div > <a (click)=" addGallary(x.spaceuid)"> <ion-icon  style="font-size: 1.5em;" name="images-sharp"></ion-icon></a></div>
+                 <div style="font-size: 1em;">Gallary</div>
+                </ion-col>
+                <ion-col>
+                 <div ><a [routerLink] = "['/walkins',x.spaceuid,x.categories,x.workspace_uid]"> <ion-icon style="font-size: 1.5em;" name="walk-sharp"></ion-icon></a></div>
+                 <div style="font-size: 1em;">Walkin</div>
+                </ion-col>
+                <ion-col>
+                  <div><a [routerLink] = "['/view-walkins',x.spaceuid,x.categories,x.workspace_uid]"><ion-icon style="font-size: 1.5em;" name="eye-sharp"></ion-icon></a></div>
+                  <div style="font-size: 1em;">View Walkin</div>
+                </ion-col>
+               
+              </ion-row>
+            </ion-grid>
+          </ion-card>
+      </div>
+    </div>
+   </div>
+  
+
+
+   <div *ngIf="showFormvalue==1" style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+    <div style="height: 100%;width: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;" >
+     
+  <div>
+    <ion-grid style="padding-top:10%;padding-bottom:10%;">
+      <ion-row><h1 style="font-family: Arial, Helvetica, sans-serif;color:#1E3D58 ;">Update Space Details</h1></ion-row>
+    </ion-grid>
+  </div>
+  <div style="border:1px solid white;bottom:0%;height: 60%;position:relative;width:100%;overflow: scroll;position: relative;">
+      <!-- <div style="border:1px solid white;bottom:0%;;position:relative;height: 80%;overflow: scroll;;"> -->
+        <form #editSpaceForm="ngForm" >
+        <ion-grid  style="width: 100%;">
+          <ion-row>
+            <ion-textarea   
+            type="text"    
+            [(ngModel)]="description_" 
+            name="description" 
+            required
+            maxlength="100"
+            #description="ngModel" 
+            placeholder="Description" style="background-color: #E8EEF1;border-radius: 5px">
+            </ion-textarea>
+            <div style="color:red;" *ngIf="!description?.valid && (description?.dirty || description?.touched)">
+              Invalid description
+              <div *ngIf="description.errors.required">
+                description is required
+             </div>
+             <div *ngIf="description.errors.maxlength">
+              maxlength is 100
+           </div>
+           </div>
+          </ion-row>
+          <ion-row>
+            <div style="padding-bottom: 5%;padding-top: 5%;width: 100%;">
+            <ion-textarea   
+            type="text"  
+            [(ngModel)]="address_" 
+            name="address" 
+            required
+            maxlength="100"
+            #address="ngModel" 
+             style="background-color: #E8EEF1;border-radius: 5px">
+            </ion-textarea>
+          </div>
+          <div style="color:red;" *ngIf="!address?.valid && (address?.dirty || address?.touched)">
+            Invalid address
+            <div *ngIf="address.errors.required">
+              address is required
+           </div>
+           <div *ngIf="address.errors.maxlength">
+            maxlength is 100
+         </div>
+         </div>
+          </ion-row>
+          <ion-row>
+            <div style="padding-bottom: 5%;width: 100%;">
+              <ion-input
+               style="width: 100%;"
+                type="text"  
+              placeholder="province"
+              [(ngModel)]="province_" 
+              required
+              maxlength="100"
+              #province="ngModel" 
+              name="province"
+               style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+            </div>
+            <div style="color:red;" *ngIf="!province?.valid && (province?.dirty || province?.touched)">
+              Invalid province
+              <div *ngIf="province.errors.required">
+                province is required
+             </div>
+             <div *ngIf="province.errors.maxlength">
+              maxlength is 100
+           </div>
+           </div>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-label style="font-family: Arial, Helvetica, sans-serif;font-size: .9em;color:#057DCD;font-weight: bold;">Price </ion-label>
+              <ion-input style="width: 100%;"    
+              type="number"  
+              [(ngModel)]="price_" 
+              name="price_"
+              placeholder="Price"
+               style="background-color: #E8EEF1;border-radius: 20px;width: 100%;"></ion-input>
+            </ion-col>
+            <ion-col>
+              <ion-label style="font-family: Arial, Helvetica, sans-serif;font-size: .9em;color:#057DCD;font-weight: bold;">Category </ion-label>
+              <ion-select  [(ngModel)]="category_number_"   required     #category_number="ngModel"  name="category_number">
+                <ion-select-option value="1">1</ion-select-option>
+                <ion-select-option value="2">2</ion-select-option>
+                <ion-select-option value="3">3</ion-select-option>
+                <ion-select-option value="4">4</ion-select-option>
+            </ion-select>
+            <div style="color:red;" *ngIf="!category_number?.valid && (category_number?.dirty || category_number?.touched)">
+              Invalid category_number
+              <div *ngIf="address.errors.required">
+                category_number is required
+             </div>
+          </div>
+            </ion-col>
+          </ion-row>
+         
+          <ion-row>
+            <div style="font-family: Arial, Helvetica, sans-serif;font-size: 1em;color:#057DCD;font-weight: bold;padding-top: 5%;padding-bottom: 5%;">
+              <b>Animenities</b>
+            </div>
+          </ion-row>
+          <ion-row style="height: 100px;overflow: scroll;">
+            <ion-col *ngFor="let cartoon of cartoonsData" size="2" style="text-align: center;font-size: .8em;">
+              <div style="font-size: 14px;"> 
+                  <input type="checkbox" type="checkbox"    (change)="onChange(cartoon.name, $event.target.checked)"  />
+              </div>
+              <div> {{ cartoon.name }}</div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col style="width:100%; ">
+             <div style="width:100%;padding-top:5%;padding-bottom:5%;right: -13px;position: absolute; ">
+               <ion-button (click)=" updateSpace()" [disabled]="!editSpaceForm.valid"   style="color:black; width: 100%;--border-radius: 20px;--background: #E1C340;height: 50px;font-weight: bold;">EDIT</ion-button>
+              </div>
+            </ion-col>
+            <ion-col>
+            <div style="width:100%;padding-top:5%;padding-bottom:5%;position: absolute;left: -15px; ">
+             <ion-button  (click)=" close()" style="width: 100%;--border-radius: 20px;--background: #DB1F48;height: 50px;color:white">CLOSE</ion-button>
+            </div>
+          </ion-col>
+            </ion-row>
+        </ion-grid>
+      </form>
+      </div>
+    </div>
+   </div>
+   <div *ngIf="googleMaps==1" style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+    <div style="height: 100%;width: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;border-bottom-right-radius:10%" >
+  <div>
+  <ion-grid style="padding-top:10%;padding-bottom:10%;">
+      <ion-row><h1 style="font-family: Arial, Helvetica, sans-serif;color:#1E3D58 ;">Google Maps</h1></ion-row>
+    </ion-grid>
+  </div>
+  <form #setMapForm="ngForm" >
+    <div style="border:1px solid white;bottom:0%;;position:relative;overflow: scroll;position: relative;height: 70%;">
+        <ion-grid  style="width: 100%;">
+          <ion-row>
+            <div style="width: 100%;" >
+              <ion-textarea 
+              placeholder="add workspace address to google maps..."
+              type="text" 
+              [(ngModel)]="addressLocation" 
+              name="addressLocation"
+              required
+              minlength="2"
+              pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9])*$"
+              #addressLocationErr="ngModel" 
+              style="background-color: #E8EEF1;border-radius: 5px">
+        </ion-textarea>
+            </div>
+         
+            <div style="color:red;width: 100%;" *ngIf="!addressLocationErr?.valid && (addressLocationErr?.dirty || addressLocationErr?.touched)">
+              Invalid First Name
+              <div *ngIf="addressLocationErr.errors.required">
+                First Name is required
+             </div>
+             <div *ngIf="addressLocationErr.errors.minlength">
+               First Name Minimum Length is {{addressLocationErr.errors.minlength?.requiredLength}}
+             </div>
+           </div>
+          </ion-row>
+          <ion-row>
+            <ion-col  *ngIf="!showingCurrent">
+              <ion-text class="coords">My Latitude : {{lat}}</ion-text>
+            </ion-col>
+            <ion-col  *ngIf="!showingCurrent">
+              <ion-text class="coords">My Longitude : {{lng}}</ion-text>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <div >
+              <ion-col>
+                <ion-button color="success" [disabled]="!setMapForm.valid" (click)="geocode()"   style="width: 100%;margin-top: 5%;">
+                  Add to Google Maps
+                </ion-button>
+              </ion-col>
+            </div>
+            <ion-col>
+              <ion-button  (click)=" close()" style="--background: #DB1F48;color:white;margin-top: 5%;">CLOSE</ion-button>
+            </ion-col>
+            </ion-row>
+        </ion-grid>
+      </div>
+    </form>
+    </div>
+   </div>
+   <div *ngIf="showExtras==1" style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+    <div style="height: 100%;width: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;border-bottom-right-radius:10%" >
+  <div>
+  <ion-grid style="padding-top:10%;padding-bottom:10%;">
+      <ion-row><h1 style="font-family: Arial, Helvetica, sans-serif;color:#1E3D58 ;">Add Extras</h1></ion-row>
+    </ion-grid>
+  </div>
+  <div style="border:1px solid white;bottom:0%;;position:relative;overflow: scroll;position: relative;height: 70%;">
+        <form *ngIf="showExtras==1" #extrasForm="ngForm">  
+        <ion-grid  style="width: 100%;">
+          <ion-row>
+           <div>Items: </div>
+           <div style="background-color: #FAD02C;font-size: 1.1em;border-radius: 50%;width: 8%;text-align: center;">{{this.extrasCart}}</div> 
+          </ion-row>
+          <ion-row>
+              <ion-col size="6">
+                <ion-input style="width: 100%;"   
+                type="text"  
+                placeholder="Amenity"
+                [(ngModel)]="enemity" 
+                name="enemity"
+                maxlength="8"
+                required
+                minlength="2"
+                pattern="^[a-zA-Z]+$"
+                #enemityErr="ngModel"  style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+                <div style="color:red;" *ngIf="!enemityErr?.valid && (enemityErr?.dirty || enemityErr?.touched)">
+                  Invalid First item
+                  <div *ngIf="enemityErr.errors.required">
+                    item is required
+                 </div>
+                 <div *ngIf="enemityErr.errors.minlength">
+                   First Name Minimum Length is {{enemityErr.errors.minlength?.requiredLength}}
+                 </div>
+                 <div *ngIf="enemityErr.errors.maxlength">
+                  First Name Maximum Length is {{enemityErr.errors.maxlength?.requiredLength}}
+                </div>
+               </div>
+              </ion-col>
+              <ion-col size="6">
+                <ion-input 
+                type="number"  
+                placeholder="Price"
+                [(ngModel)]="price" 
+                name="price"
+                required
+                maxlength="3"
+                minlength="2"
+                pattern="^[0-9]+$"
+                #priceErr="ngModel"
+                 style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+              </ion-col>
+              <div style="color:red;" *ngIf="!priceErr?.valid && (priceErr?.dirty || priceErr?.touched)">
+                Invalid Price
+                <div *ngIf="priceErr.errors.required">
+                  Price is required
+               </div>
+               <div *ngIf="priceErr.errors.minlength">
+                Price Minimum Length is {{priceErr.errors.minlength?.requiredLength}}
+               </div>
+               <div *ngIf="priceErr.errors.maxlength">
+                Price Maximum Length is {{priceErr.errors.maxlength?.requiredLength}}
+              </div>
+             </div>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-fab  horizontal="end"  >
+                <ion-fab-button *ngIf="this.extrasCart<5"  [disabled]="!extrasForm.valid" (click)="addExtrasToarray()" color="danger">
+                  <ion-icon name="add"></ion-icon>
+                </ion-fab-button>
+              </ion-fab>
+            </ion-col>
+          </ion-row>
+      
+        </ion-grid>
+        </form>
+        <div style="margin-top:20%;" >
+          <ion-button *ngIf="this.extrasCart>0"  [disabled]="!extrasForm.valid" expand="full" color="secondary" (click)="addExtras()"> SUBMIT</ion-button>
+         </div>
+         <div style="margin-top:20%;" >
+          <ion-button (click)="close()"  expand="full" color="danger" (click)="addExtras()"> CLOSE</ion-button>
+         </div>
+      </div>
+    </div>
+   </div>  
+
+   <div *ngIf="ShowchangeProfileImage==1" style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+    <div style="height: 100%;width: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;border-bottom-right-radius:10%" >
+  <div>
+  <ion-grid style="padding-top:10%;padding-bottom:10%;">
+      <ion-row><h1 style="font-family: Arial, Helvetica, sans-serif;color:#1E3D58 ;">Change Profile Picture</h1></ion-row>
+    </ion-grid>
+  </div>
+  <div style="border:1px solid white;bottom:0%;;position:relative;overflow: scroll;position: relative;height: 70%;">
+     
+        <form #changeImageForm="ngForm">
+        <ion-grid  style="width: 100%;">
+          <ion-row>
+          </ion-row>
+          <ion-row>
+              <ion-col >
+                <ion-input style="width: 100%;" 
+                type="file"  required   name="img"  accept="image/*" id="upload" (change)="fileChangeEvent($event)"
+                            style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+              </ion-col>
+              <div style="color:red;width: 100%;" *ngIf="!priceErr?.valid && (priceErr?.dirty || priceErr?.touched)">
+                Invalid Price
+                <div *ngIf="priceErr.errors.required">
+                  Price is required
+               </div>
+             </div>
+          </ion-row>
+          <ion-row>
+            <div>
+              <div style="color:red;" *ngIf=" this.imageError!==''">{{this.imageError}}</div>
+            </div>
+          </ion-row>
+          <ion-row>
+            <div style="margin-top:20%;" >
+              <ion-button  [disabled]="!changeImageForm.valid" *ngIf=" this.isImageSaved" expand="full" color="success"  (click)="changeImage()"  style="width: 100%;">SUBMIT</ion-button>
+             </div>
+          </ion-row>
+          <ion-row>
+            <div  >
+              <ion-button   expand="full" color="danger"  (click)="close()"  style="width: 100%;">CLOSE</ion-button>
+             </div>
+          </ion-row>
+        </ion-grid>
+      </form>
+ 
+      </div>
+    </div>
+   </div> 
+
+
+
+ <div > 
+  <div >  
+    <!-- <form *ngIf="showExtras==1" #extrasForm="ngForm">  
+      
+    <h3 style="font-size: 18px; margin-top: 15px;">Add extras</h3>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-input  class="amenity"
+          type="text"  
+          placeholder="Amenity"
+          [(ngModel)]="enemity" 
+          name="enemity"
+          maxlength="8"
+          required
+          minlength="2"
+          pattern="^[a-zA-Z]+$"
+          #enemityErr="ngModel" 
+          >
+       </ion-input>
+       <div style="color:red;" *ngIf="!enemityErr?.valid && (enemityErr?.dirty || enemityErr?.touched)">
+        Invalid First item
+        <div *ngIf="enemityErr.errors.required">
+          item is required
+       </div>
+       <div *ngIf="enemityErr.errors.minlength">
+         First Name Minimum Length is {{enemityErr.errors.minlength?.requiredLength}}
+       </div>
+       <div *ngIf="enemityErr.errors.maxlength">
+        First Name Maximum Length is {{enemityErr.errors.maxlength?.requiredLength}}
+      </div>
+     </div>
+        </ion-col>
+        <ion-col>
+          <ion-input  class="price"
+          type="number"  
+          placeholder="Price"
+          [(ngModel)]="price" 
+          name="price"
+          required
+          maxlength="3"
+          minlength="2"
+          pattern="^[0-9]+$"
+          #priceErr="ngModel" 
+          >
+       </ion-input>
+       <div style="color:red;" *ngIf="!priceErr?.valid && (priceErr?.dirty || priceErr?.touched)">
+        Invalid Price
+        <div *ngIf="priceErr.errors.required">
+          Price is required
+       </div>
+       <div *ngIf="priceErr.errors.minlength">
+        Price Minimum Length is {{priceErr.errors.minlength?.requiredLength}}
+       </div>
+       <div *ngIf="priceErr.errors.maxlength">
+        Price Maximum Length is {{priceErr.errors.maxlength?.requiredLength}}
+      </div>
+     </div>
+        </ion-col>
+     
+        <ion-col>
+          {{this.messageValue}}
+        </ion-col>
+
+        <ion-col>
+          <div>Items:{{this.extrasCart}}</div>
+          <ion-fab  horizontal="end"  >
+            <ion-fab-button *ngIf="this.extrasCart<5"  [disabled]="!extrasForm.valid" (click)="addExtrasToarray()" color="danger">
+              <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+          </ion-fab>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+      
+        <ion-button *ngIf="this.extrasCart>0"  [disabled]="!extrasForm.valid" expand="full" color="secondary" (click)="addExtras()"> Add</ion-button>
+      </ion-row>
+    </ion-grid>
+</form> -->
+</div> 
+   
+   
+
+
+    <!-- <form #editSpaceForm="ngForm" type="text" style="width: 100%;top: 15%;height: 80%;">
+            <ion-label>Description</ion-label>
+           <ion-textarea
+              type="text"    
+              [(ngModel)]="description_" 
+              name="description" 
+              required
+              maxlength="100"
+              #description="ngModel" 
+              placeholder="Company name"
+              style="border-style: solid;height: 15%;border-width: 1px;border-color: #16D6E3;border-top: 0px;margin: 0px;"></ion-textarea>
+            <div style="color:red;" *ngIf="!description?.valid && (description?.dirty || description?.touched)">
+              Invalid description
+              <div *ngIf="description.errors.required">
+                description is required
+             </div>
+             <div *ngIf="description.errors.maxlength">
+              maxlength is 100
+           </div>
+           </div>
+           <ion-label>Price</ion-label>
+          <ion-input  
+              type="number"  
+              placeholder="price"
+              [(ngModel)]="price_" 
+              name="price_">
+          </ion-input>
+          <ion-label>Province</ion-label>
+         <ion-input  
+          type="text"  
+          placeholder="province"
+          [(ngModel)]="province_" 
+          required
+          maxlength="100"
+          #province="ngModel" 
+          name="province">
+       </ion-input>
+       <div style="color:red;" *ngIf="!province?.valid && (province?.dirty || province?.touched)">
+        Invalid province
+        <div *ngIf="province.errors.required">
+          province is required
+       </div>
+       <div *ngIf="province.errors.maxlength">
+        maxlength is 100
+     </div>
+     </div>
+     <ion-label>Address</ion-label>
+           <ion-textarea  
+           type="text"  
+           [(ngModel)]="address_" 
+           name="address" 
+           required
+           maxlength="100"
+           #address="ngModel" 
+           style="border-style: solid;height: 15%;border-width: 1px;border-color: #16D6E3;border-top: 0px;margin: 0px;">
+          </ion-textarea>
+          <div style="color:red;" *ngIf="!address?.valid && (address?.dirty || address?.touched)">
+            Invalid address
+            <div *ngIf="address.errors.required">
+              address is required
+           </div>
+           <div *ngIf="address.errors.maxlength">
+            maxlength is 100
+         </div>
+         </div>
+            <ion-label>Category Number</ion-label>
+            <ion-select  [(ngModel)]="category_number_"   required     #category_number="ngModel"  name="category_number">
+                <ion-select-option value="1">1</ion-select-option>
+                <ion-select-option value="2">2</ion-select-option>
+                <ion-select-option value="3">3</ion-select-option>
+                <ion-select-option value="4">4</ion-select-option>
+            </ion-select>
+            <div style="color:red;" *ngIf="!category_number?.valid && (category_number?.dirty || category_number?.touched)">
+              Invalid category_number
+              <div *ngIf="address.errors.required">
+                category_number is required
+             </div>
+          </div>
+<ion-item>
+  <ion-grid>
+    <ion-row>
+     <ion-label style="font-size:18px;color: black;">Update amenities</ion-label>
+    </ion-row>
+     <ion-row style="color: black;margin: 5px;">
+       <ion-col *ngFor="let cartoon of cartoonsData">
+         <div style="font-size: 14px;">{{ cartoon.name }} <br>  <input type="checkbox"    (change)="onChange(cartoon.name, $event.target.checked)" />
+         </div>
+       </ion-col>
+     </ion-row>
+   </ion-grid>
+ </ion-item>
+<ion-item>
+  <ion-button (click)=" updateSpace()" [disabled]="!editSpaceForm.valid"   expand="full" class="edit">Edit</ion-button>
+  <ion-button (click)=" close()"   expand="full" class="close">Close</ion-button>
+</ion-item>
+    </form> -->
+<div>
+   <!-- <form #setMapForm="ngForm" >
+  <ion-label style="font-size: 18px; margin-left: 10px;">Add workspace address to google maps</ion-label>
+  <ion-item>
+    <ion-label style="font-size: 18px;">Enter Address to Geocode</ion-label>
+    <ion-input 
+                type="text" 
+                [(ngModel)]="addressLocation" 
+                name="addressLocation"
+                required
+                minlength="2"
+                pattern="^[_A-z0-9]*((-|\s)*[_A-z0-9])*$"
+               
+                #addressLocationErr="ngModel" 
+                ></ion-input>
+                <div style="color:red;" *ngIf="!addressLocationErr?.valid && (addressLocationErr?.dirty || addressLocationErr?.touched)">
+                  Invalid First Name
+                  <div *ngIf="addressLocationErr.errors.required">
+                    First Name is required
+                 </div>
+                 <div *ngIf="addressLocationErr.errors.minlength">
+                   First Name Minimum Length is {{addressLocationErr.errors.minlength?.requiredLength}}
+                 </div>
+               </div>
+  </ion-item>
+  <ion-row  *ngIf="!showingCurrent">
+    <ion-text class="coords">My Latitude : {{lat}}</ion-text>
+  </ion-row>
+  <ion-row  *ngIf="!showingCurrent">
+    <ion-text class="coords">My Longitude : {{lng}}</ion-text>
+  </ion-row>
+  <ion-button color="success" [disabled]="!setMapForm.valid" (click)="geocode()" expand="full" class="ion-margin">
+    Add to Google Maps</ion-button>  
+  </form> -->
+</div> 
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <ion-grid>
+    <!--  <ion-row>
+  <ion-card  *ngFor="let x of arrayList">
+    <div class="newimage">
+      <img [src]="x.image">
+    </div>
+    <ion-label>
+     <ion-grid>
+       <ion-row>
+        {{x.categories}}
+       </ion-row>
+       <ion-row>
+        {{x.price}}
+       </ion-row>
+       <ion-row>
+        {{x.address}}
+       </ion-row>
+       <ion-row>
+        {{x.description}}
+       </ion-row>
+       <ion-row>
+         <ion-col *ngFor="let y of x.amenities">
+          {{y}} 
+         </ion-col>
+       </ion-row>
+       <ion-row>
+
+       
+         <p [routerLink] = "['/previews',x.uid,x.workspace_uid,x.spaceuid]" style="color: #9010F5; font-size: 14px;">Reviews</p>
+       </ion-row>
+       <ion-row>
+         <ion-col> -->
+          <!-- <ion-button (click)="EditForm(x.spaceuid)">Edit</ion-button> -->
+          <!-- <ion-icon (click)="EditForm(x.spaceuid)" name="create-outline" class="editing"></ion-icon>Edit
+         </ion-col>
+         <ion-col >
+           <ion-button (click)=" addGallary(x.spaceuid)" class="gallery" shape="round">Gallery</ion-button>
+         </ion-col>
+         <ion-col> -->
+          <!-- <ion-button color="danger" (click)="remove(x.spaceuid)">Remove</ion-button> -->
+          <!-- <ion-icon color="danger" (click)="remove(x.spaceuid)" name="trash-outline" class="remove"></ion-icon>Remove
+         </ion-col>
+         <ion-col>
+          <ion-button  [routerLink] = "['/walkins',x.spaceuid,x.categories,x.workspace_uid]" class="walkins" shape="round">Walkins</ion-button>
+         </ion-col> -->
+       <!-- </ion-row> -->
+       <!-- <ion-row> -->
+         <!-- <ion-col>
+        <ion-button  [routerLink] = "['/view-walkins',x.spaceuid,x.categories,x.workspace_uid]" class="view" shape="round">View Walkins</ion-button>
+        </ion-col>
+       </ion-row>
+     </ion-grid>
+    </ion-label>
+  </ion-card>
+</ion-row>-->
+<ion-row> 
+
+<!--  
+      <ion-input type="file"  required  *ngIf="this.gallaryArraySize < 4"  name="img"  accept="image/*" id="upload" (change)="onselect($event)"></ion-input>
+      <div>
+        <div  style="color:red;" *ngIf=" this.imageError!==''">{{this.imageError}}</div>
+      </div>
+    </ion-item>
+    <ion-grid>
+      <ion-row>
+       <b>Total images upload: {{this.gallaryArraySize}}</b> 
+
+      </ion-row>
+   
+      <ion-row>
+        <ion-fab  horizontal="end"  >
+          <ion-fab-button    (click)="uploadGallary()"color="warning">
+            <ion-icon name="add"></ion-icon>
+          </ion-fab-button>
+        </ion-fab>
+      </ion-row>
+      <ion-row (click)="freshers()" >
+        <img *ngFor="let url of urls" [src]="url">
+      </ion-row>
+    </ion-grid> 
+
+  </div> -->
+</ion-row>
+      <ion-row>
+        
+  
+  
+  <!-- <ion-item> 
+    <div *ngIf="showExtras==1"> 
+      <form #extrasForm="ngForm">    
+      <h3 style="font-size: 18px; margin-top: 15px;">Add extras</h3>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-input  class="amenity"
+            type="text"  
+            placeholder="Amenity"
+            [(ngModel)]="enemity" 
+            name="enemity"
+            maxlength="8"
+            required
+            minlength="2"
+            pattern="^[a-zA-Z]+$"
+            #enemityErr="ngModel" 
+            >
+         </ion-input>
+         <div style="color:red;" *ngIf="!enemityErr?.valid && (enemityErr?.dirty || enemityErr?.touched)">
+          Invalid First item
+          <div *ngIf="enemityErr.errors.required">
+            item is required
+         </div>
+         <div *ngIf="enemityErr.errors.minlength">
+           First Name Minimum Length is {{enemityErr.errors.minlength?.requiredLength}}
+         </div>
+         <div *ngIf="enemityErr.errors.maxlength">
+          First Name Maximum Length is {{enemityErr.errors.maxlength?.requiredLength}}
+        </div>
+       </div>
+          </ion-col>
+          <ion-col>
+            <ion-input  class="price"
+            type="number"  
+            placeholder="Price"
+            [(ngModel)]="price" 
+            name="price"
+            required
+            maxlength="3"
+            minlength="2"
+            pattern="^[0-9]+$"
+            #priceErr="ngModel" 
+            >
+         </ion-input>
+         <div style="color:red;" *ngIf="!priceErr?.valid && (priceErr?.dirty || priceErr?.touched)">
+          Invalid Price
+          <div *ngIf="priceErr.errors.required">
+            Price is required
+         </div>
+         <div *ngIf="priceErr.errors.minlength">
+          Price Minimum Length is {{priceErr.errors.minlength?.requiredLength}}
+         </div>
+         <div *ngIf="priceErr.errors.maxlength">
+          Price Maximum Length is {{priceErr.errors.maxlength?.requiredLength}}
+        </div>
+       </div>
+          </ion-col>
+       
+          <ion-col>
+            {{this.messageValue}}
+          </ion-col>
+ 
+          <ion-col>
+            <div>Items:{{this.extrasCart}}</div>
+            <ion-fab  horizontal="end"  >
+              <ion-fab-button *ngIf="this.extrasCart<5"  [disabled]="!extrasForm.valid" (click)="addExtrasToarray()" color="danger">
+                <ion-icon name="add"></ion-icon>
+              </ion-fab-button>
+            </ion-fab>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+        
+          <ion-button *ngIf="this.extrasCart>0"  [disabled]="!extrasForm.valid" expand="full" color="secondary" (click)="addExtras()"> Add</ion-button>
+        </ion-row>
+      </ion-grid>
+</form>
+</div> 
+<div *ngIf="ShowchangeProfileImage==1">
+<form #changeImageForm="ngForm">
+        <h3 style="font-size: 18px;">Change profile</h3>
+        <div>
+          <ion-input type="file"  required   name="img"  accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+        
+          <div style="color:red;" *ngIf="!priceErr?.valid && (priceErr?.dirty || priceErr?.touched)">
+            Invalid Price
+            <div *ngIf="priceErr.errors.required">
+              Price is required
+           </div>
+         </div>
+         <ion-button [disabled]="!changeImageForm.valid" *ngIf=" this.isImageSaved" expand="full" color="success"  (click)="changeImage()"> Change Profile</ion-button>
+          <div>
+            <div style="color:red;" *ngIf=" this.imageError!==''">{{this.imageError}}</div>
+          </div>
+          
+        </div>
+  
+      </form>
+</div>
+     -->
+      </ion-row>
+    </ion-grid>
+   
+    
+</ion-content>

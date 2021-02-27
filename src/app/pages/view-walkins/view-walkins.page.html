@@ -1,0 +1,58 @@
+
+
+
+
+<ion-content>
+  <div style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+    <div style="height: 100%;width: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;border-bottom-right-radius:10%" >
+  <div>
+  <ion-grid style="padding-top:5%;padding-bottom:5%;">
+    <ion-row>
+      <ion-buttons style="color:#1E3D58" >
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+    </ion-row>
+      <ion-row><h1 style="font-family: Arial, Helvetica, sans-serif;color:#1E3D58 ;">View Walkins</h1></ion-row>
+    </ion-grid>
+  </div>
+  <div style="border:1px solid white;bottom:0%;;position:relative;overflow: scroll;position: relative;height: 70%;">
+        <ion-card *ngFor="let x of walkinList">
+          <ion-grid>
+            <ion-row>
+              <div style="width: 100%;padding-top: 3%;">Name: {{x.name}}</div>
+              <div style="width: 100%;padding-top: 3%;">Surname: {{x.surname}}</div>
+              <div style="width: 100%;padding-top: 3%;">Email: {{x.email}}</div>
+              <div style="width: 100%;padding-top: 3%;;padding-bottom: 3%;">Phone:{{x.phone}}</div>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                checkin :{{x.checkin}}
+              </ion-col>
+              <ion-col>
+                timein :{{x.timein}}
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col>
+                checkout :{{x.checkout}}
+              </ion-col>
+              <ion-col>
+                timeout :{{x.timeout}}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      
+      </div>
+    </div>
+   </div> 
+
+
+
+
+
+
+
+
+
+</ion-content>

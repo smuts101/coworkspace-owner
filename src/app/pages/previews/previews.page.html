@@ -1,0 +1,63 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+
+
+
+
+<ion-content>
+  <div style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+    <div style="height: 100%;width: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;border-bottom-right-radius:10%" >
+  <div>
+  <ion-grid style="padding-top:10%;padding-bottom:0%;">
+    <ion-row>
+      <ion-buttons style="color:#1E3D58" >
+        <ion-back-button defaultHref="/"></ion-back-button>
+      </ion-buttons>
+    </ion-row>
+      <ion-row><h1 style="font-family: Arial, Helvetica, sans-serif;color:#1E3D58 ;">Previews</h1></ion-row>
+    </ion-grid>
+  </div>
+  
+      <div style="border:1px solid white;bottom:0%;;position:relative;overflow: scroll;position: relative;height: 70%;">
+        <ion-card *ngFor="let y of commentsList">
+          <ion-grid>
+            <ion-row>
+              <p style="font-family: Helvetica, sans-serif;font-size:1em;color:rgb(59, 59, 59);font-weight: bold;">{{y.comment}}.</p>
+            </ion-row>
+            <ion-row>
+              <ion-col style="font-family: Arial, Helvetica, sans-serif;font-size:.9em;color:rgb(233, 177, 177);">
+                {{y.datecomment}}/{{y.timecomment}} 
+              </ion-col>
+            </ion-row>
+           
+          </ion-grid>
+        </ion-card>
+      
+      </div>
+    </div>
+   </div>
+
+
+
+
+  <!-- <div class="container">
+  <ion-list>
+    <ion-item *ngFor="let y of commentsList">
+      <ion-grid>
+        <ion-row>
+          <p>{{y.comment}}</p>
+        </ion-row>
+        <ion-row>
+          <ion-col>Date: {{y.datecomment}}</ion-col>
+          <ion-col>Time: {{y.timecomment}} </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+  </div> -->
+</ion-content>

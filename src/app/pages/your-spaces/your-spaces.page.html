@@ -1,0 +1,54 @@
+
+
+<ion-content>
+    <div style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+        <div style="height: 100%;width: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;border-bottom-right-radius:10%">
+
+            <div style="padding-bottom:10%;">
+                <ion-grid style="padding-top:10%;padding-bottom:0%;">
+                    <ion-row>
+                        <!-- <ion-buttons style="color:#1E3D58" >
+                          <ion-back-button (click)="returnHome()"></ion-back-button>
+                        </ion-buttons> -->
+                        <a (click)="returnHome()">back</a>
+                      </ion-row>
+                    <ion-row>
+                        <h1 style="font-family: Arial, Helvetica, sans-serif;color:#1E3D58 ;">Categories</h1>
+                        
+                    </ion-row> 
+                </ion-grid>
+            </div>
+            <div style="border:1px solid white;bottom:0%;;position:relative;height: 70%;overflow: scroll;">
+                <ion-grid style="width: 100%;">
+                    <ion-row *ngFor="let x of ret_array">
+                        <div *ngIf="x=='Sharing'" style="margin-bottom: 5%; text-align: center; height: 50px;width: 100%; background-color:#F8EFFB;border-radius: 15px;">
+                            <a style="color:#603F8B;text-decoration: none;" [routerLink]="['/update-space/',x]">
+                                <h5>{{x}}</h5>
+                            </a>
+                        </div>
+                        <div *ngIf="x=='private office'" style="margin-bottom: 5%; text-align: center; height: 50px;width: 100%; background-color: #EFF8FB;border-radius: 15px;color:#5882FA">
+                            <a style="color:#5882FA;text-decoration: none" [routerLink]="['/update-space/',x]">
+                                <h5>{{x}}</h5>
+                            </a>
+                        </div>
+                        <div *ngIf="x=='Pair'" style="margin-bottom: 5%; text-align: center; height: 50px;width: 100%; background-color: #FBF8EF;border-radius: 15px;color:#F7D358">
+                            <a style="color:#F7D358;text-decoration: none" [routerLink]="['/update-space/',x]">
+                                <h5>{{x}}</h5>
+                            </a>
+                        </div>
+                        <div *ngIf="x=='BoardRoom'" style="margin-bottom: 5%; text-align: center; height: 50px;width: 100%;background-color: #FBEFF2;border-radius: 15px;color:#FA5882">
+                            <a style="color:#FA5882;text-decoration: none" [routerLink]="['/update-space/',x]">
+                                <h5>{{x}}</h5>
+                            </a>
+                        </div>
+                        <div *ngIf="x=='OpenSpace'" style="margin-bottom: 5%; text-align: center; height: 50px;width: 100%;background-color: #FBEFF2;border-radius: 15px;color:#a78991">
+                            <a style="color:#a78991;text-decoration: none" [routerLink]="['/update-space/',x]">
+                                <h5>{{x}}</h5>
+                            </a>
+                        </div>
+                    </ion-row>
+                </ion-grid>
+            </div>
+        </div>
+    </div>
+</ion-content>

@@ -1,0 +1,35 @@
+<!-- <ion-header class="ion-no-border"[translucent]="true">
+  <ion-toolbar>
+    <ion-title>onboarding</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content [fullscreen]="true">
+  <ion-slides pager="true>">
+    <ion-slide>
+      <img src="./assets/purple.png">
+      <h2>View your statistics</h2>
+      <br><br>
+     <!-- <ion-button [routerLink]="'/profiles'" style="--background:#9010F5; border-radius: 100%;" shape ="round"> -->
+      <ion-icon [routerLink]="'/signin'" style="color:#9010F5;" name="chevron-forward-circle"></ion-icon>
+     </ion-slide>
+
+    <ion-slide>
+      <img src="./assets/purple1.png">
+      <h2>Add your profile</h2>
+      <br><br>
+      <!-- <ion-button [routerLink]="'/owner-landing'" style="--background:#9010F5;" shape ="round"></ion-button> -->
+      <ion-icon [routerLink]="'/signin'" style="color:#9010F5;" name="chevron-forward-circle"></ion-icon>
+    </ion-slide>
+
+    <ion-slide>
+      <img src="./assets/purple2.png">
+      <h2>Upload working spaces</h2>
+      <br><br>
+      <!-- <ion-button [routerLink]="'/profiles'" style="--background:#9010F5;" shape ="round"></ion-button> -->
+      <ion-icon [routerLink]="'/signin'" style="color:#9010F5; display: flex;" name="chevron-forward-circle"></ion-icon>
+
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>

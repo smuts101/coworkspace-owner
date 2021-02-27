@@ -1,0 +1,179 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>update-space</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+
+<ion-content>
+
+
+
+
+    <div style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+        <div style="width:100%; height: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;border-bottom-right-radius:10%" >
+         
+      
+          <div>
+            <ion-grid>
+                <ion-row>
+                    <ion-buttons style="color:#1E3D58" >
+                      <ion-back-button defaultHref="/"></ion-back-button>
+                    </ion-buttons>
+                  </ion-row>
+              <ion-row>
+                <h1 style="font-family:Arial, Helvetica, sans-serif;font-size: 2em;">{{profile?.company_name}}</h1>
+              </ion-row>
+              <ion-row>
+                <ion-col size="6">
+                 <div style="font-family:Arial, Helvetica, sans-serif;font-size: 1em;padding-top:10%;"><span>Company address:</span>
+                <p style="font-size: .7em;font-family:  sans-serif;color:gray;">{{profile?.company_address}} </p>
+                </div> 
+                 <div style="font-family:Helvetica, sans-serif;font-size: .9em;color:gray;padding-top:2%;"><span>Email:</span>
+                  <p style="font-size: .7em;font-family:  sans-serif;">{{profile?.company_emaile}} </p>
+                </div> 
+                 <div style="font-family:Helvetica, sans-serif;font-size: .9em;color:gray;padding-top:2%;"><span>Telephone:</span>
+                  <p style="font-size: .7em;font-family:  sans-serif;">{{profile?.company_tel}} </p>
+                </div> 
+                <div style="font-family:Helvetica, sans-serif;font-size: .9em;color:gray;padding-top:2%;"><span>Website:</span>
+                    <p style="font-size: .7em;font-family:  sans-serif;">
+                        <a href="https://x.company_website">{{profile?.company_website}}</a>
+                    </p>
+                  </div> 
+
+<!--                
+                 <div style="font-family:Helvetica, sans-serif;font-size: .9em;font-weight:bold;color:rgb(111, 111, 241);padding-top:10%;"><a ><span>Spaces</span></a></div>
+               -->
+                </ion-col>
+                <ion-col size="6">
+                  <img style="width:10em;height:50%;border-radius: 30%;"  [src]="profile?.img_profile">
+                  <ion-icon  [routerLink]="'/profile-add'" style="background-color: #1E3D58; position: relative;bottom:40%;left:76%;bottom:15%;width:25%;color:white;font-size: 2em;border-radius: 100%;" name="create-outline"></ion-icon>
+                 </ion-col>
+              </ion-row>
+              <ion-row>
+                <div >
+                 <p style="padding:3%;background-color:#f1fdd0;border-radius: 5%;color:#75a104;font-size:.9em;font-family:  sans-serif;"> {{profile?.aboutus}}</p>
+                </div>
+              </ion-row>
+            </ion-grid>
+          </div>
+
+        </div>
+        </div>
+
+
+
+
+
+
+
+
+
+<!-- 
+-----------------------------------------
+-----------------------------------------
+----------------------------------------- -->
+
+
+    <!-- <div class="wrapper"> -->
+        <!-- <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons> -->
+
+        <!-- <div class="top">
+
+            <img style="width: 100%; height: 100%;" src="assets/profilebg.jpg">
+
+            <ion-avatar style="position: absolute; top: 20%; width: 30%; height: 40%;"> -->
+                <!-- <ion-icon style="position: absolute;top: 25%;font-size: 30px;color: white; font-weight:bold;left: 90%;"
+          name="create-outline"></ion-icon> -->
+                <!-- <img [src]="profile?.img_profile">
+
+            </ion-avatar>
+            <p style="position:absolute; font-weight:bold;color:white; bottom:20%"> {{profile?.company_name}}</p>
+            <p style="position:absolute;color:white; bottom:15%; font-size: 12px;">Company address: {{profile?.company_address}}</p>
+
+        </div>
+        <div style="width: 100%;height: 10%; position: absolute;bottom: 57%;display: flex;justify-content: center;">
+            <ion-button [routerLink]="'/profile-add'" style="height: 25px;--background:whitesmoke; font-size: 11px;color: black;opacity: 80%;"> Edit</ion-button>
+        </div>
+        <div class="bottom">
+
+            <ion-card style="width: 90%; height: 90%; display: flex;justify-content: left;align-items: initial;flex-direction: column;">
+                <ion-grid style="margin: 0;width:100%;"> -->
+                    <!-- <ion-row>
+            <p style="font-weight: bold; font-size:14px;position:absolute;left:3%;">Description <br><span style="font-weight: lighter;">{{x.aboutus}}</span></p>
+          </ion-row> -->
+                    <!-- <ion-row>
+                        <span style="font-weight: bold;">AboutUs</span>
+                    </ion-row>
+                    <ion-row>
+                        <span>  {{profile?.aboutus}} </span>
+                    </ion-row>
+                    <ion-row>
+                        <span><b>Telephone: </b> {{profile?.company_tel}}  </span>
+                    </ion-row>
+                    <ion-row>
+                        <span><b>Email: </b> {{profile?.company_emaile}} </span>
+                    </ion-row>
+                    <ion-row>
+                        <span><b>Website: </b>  <a href="https://x.company_website">{{profile?.company_website}}</a> </span>
+                    </ion-row>
+                </ion-grid> -->
+
+
+                <!-- <p style="position: absolute;left: 3%; top: 16%;">{{x.aboutus}}</p> -->
+            <!-- </ion-card>
+
+        </div>
+        <div class="segments">
+
+            <ion-segment [(ngModel)]="selectedtabs " style="position: absolute; top: 0px;">
+                <ion-segment-button (click)="view()" value="Spaces">
+                    <ion-label>Spaces</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="Reviews">
+                    <ion-label>Reviews</ion-label>
+                </ion-segment-button>
+            </ion-segment> -->
+
+
+            <!-- <div style="width: 100%; height: 85%; display: flex;justify-content: center;align-self: center;" *ngIf="selectedtabs == 'Spaces'">
+                <ion-card style="width: 90%;height: 70%;background-color: white;position: absolute;bottom: 5%;">
+                    <div *ngIf="viewSpace==1">
+                        <ion-grid style="margin: 0%;">
+                            <ion-row *ngFor="let x of ret_array">
+                                <ion-icon [routerLink]="['/update-space/',x]" name="caret-forward-outline" class="space"></ion-icon>{{x}}
+                              -->
+                                <!-- <a   [routerLink]="['/update-space/',x]">{{x}}</a> -->
+                            <!-- </ion-row>
+                        </ion-grid>
+                    </div>
+                </ion-card>
+            </div>
+            <div style="width: 100%; height: 85%; display: flex;justify-content: center;align-self: center;" *ngIf="selectedtabs == 'Reviews'">
+
+                <ion-card style="width: 90%;height: 70%;background-color: white;position: absolute;bottom: 5%;">
+                    <ion-avatar style="position: absolute; top: 10%;left: 5%;">
+                        <img style="width: 50px; height: 50px;" src="assets/bg.jpg">
+                    </ion-avatar>
+                    <p style="position: absolute;left: 23%;top: 5%; font-size: 11px;">Reviewer</p>
+                    <p style="position: absolute;top: 5%;right: 5%;font-size: 11px;">10-23-12</p>
+                    <p style="position: absolute;top: 30%;left: 20%;">This is the first review card</p>
+
+
+                </ion-card>
+            </div> -->
+
+
+
+
+        <!-- </div>
+
+
+
+    </div> -->
+</ion-content>

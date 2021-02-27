@@ -1,3 +1,35 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-menu style="background-color: #E5E9F8;" side="start" menuId="first" contentId="menuContent">
+
+
+    <ion-content style="--background:#E5E9F8;">
+      <!-- <div class="wrapper"> -->
+        <ion-list>
+            <ion-menu-toggle>
+              <ion-item [routerLink]="'/profile'">
+                <ion-icon style="font-size: 30px; color: black;" name="person-circle-outline"></ion-icon>
+                Charmaine</ion-item>
+            </ion-menu-toggle>
+            <ion-menu-toggle>
+              <ion-item [routerLink]="'/owner-landing'">
+                <ion-icon style="font-size: 30px; color: black;" name="home-outline"></ion-icon>
+                Home</ion-item>
+            </ion-menu-toggle>
+            <ion-menu-toggle>
+              <ion-item [routerLink]="'/walkins'">
+                <ion-icon style="font-size: 30px; color: black;" name="walk-outline"></ion-icon>
+                Walkins</ion-item>
+            </ion-menu-toggle>
+            <ion-menu-toggle>
+              <ion-item (click)="logout()">
+                <ion-icon style="font-size: 30px; color: black;" name="log-out-outline" ></ion-icon>
+                Logout</ion-item>
+            </ion-menu-toggle>
+          </ion-list>
+          <!-- </div> -->
+          </ion-content>
+          </ion-menu>
+          <ion-menu-controller></ion-menu-controller>
+
+  <ion-router-outlet id="menuContent"></ion-router-outlet>
 </ion-app>

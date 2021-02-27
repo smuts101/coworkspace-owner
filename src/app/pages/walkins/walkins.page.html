@@ -1,0 +1,326 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>walkins</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+<!-- 
+<ion-buttons slot="start">
+  <ion-back-button defaultHref="/"></ion-back-button>
+</ion-buttons> -->
+
+<ion-content>
+
+
+
+
+
+
+
+
+
+  <div style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+    <div style="height: 100%;width: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;border-bottom-right-radius:10%" >
+     
+  <div>
+    <ion-grid style="padding-top:10%;padding-bottom:5%;">
+      <ion-row>
+        <ion-buttons style="color:#1E3D58" >
+          <ion-back-button defaultHref="/"></ion-back-button>
+        </ion-buttons>
+      </ion-row>
+      <ion-row><h1 style="font-family: Arial, Helvetica, sans-serif;color:#1E3D58 ;">REGISTER WALKIN</h1></ion-row>
+    </ion-grid>
+  </div>
+ 
+  <div style="border:1px solid white;bottom:0%;;position:relative;height: 70%;overflow: scroll;">
+  <form [formGroup]="walkinsForm">
+    
+        <ion-grid  style="width: 100%;">
+          <ion-row>
+            <div style="padding-bottom: 5%;width: 100%;">
+              <ion-input style="width: 100%;" type="text" formControlName="name" type="text" placeholder="Name" style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+            </div>
+            <div style="color:red;width:100%;" *ngIf="isValidInput('name')"
+            class="alert alert-danger">
+            <div *ngIf="walkinsForm.controls['name'].errors.required">
+              name is required.
+            </div>
+            <div *ngIf="walkinsForm.controls['name'].errors.maxLength">
+             Maximum length is 20
+            </div>
+            <div *ngIf="walkinsForm.controls['name'].errors.minLength">
+              min length is 2
+             </div>
+             <div *ngIf="walkinsForm.controls['name'].errors.pattern">
+              Chars are not allowed
+             </div>
+          </div>
+          </ion-row>
+          <ion-row>
+            <div style="padding-bottom: 5%;width: 100%;">
+            <ion-input style="width: 100%;" type="text" formControlName="surname" placeholder="surname"style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+          </div>
+          <div style="color:red;" *ngIf="isValidInput('surname')"
+          class="alert alert-danger">
+          <div *ngIf="walkinsForm.controls['surname'].errors.required">
+            surname is required.
+          </div>
+          <div *ngIf="walkinsForm.controls['surname'].errors.maxLength">
+           Maximum length is 20
+          </div>
+          <div *ngIf="walkinsForm.controls['surname'].errors.minLength">
+            min length is 2
+           </div>
+          
+        </div>
+          </ion-row>
+          <ion-row>
+            <div style="padding-bottom: 5%;width: 100%;">
+            <ion-input style="width: 100%;" type="email" formControlName="email" placeholder="email"style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+            </div>
+            <div style="color:red;" *ngIf="isValidInput('email')"
+            class="alert alert-danger">
+            <div *ngIf="walkinsForm.controls['email'].errors.required">
+             Email is required
+            </div>
+             <div *ngIf="walkinsForm.controls['email'].errors.pattern">
+            incorrect email format
+             </div>
+            </div>
+          </ion-row>
+          <ion-row>
+            <div style="padding-bottom: 5%;width: 100%;">
+            <ion-input style="width: 100%;" type="number" formControlName="phone" placeholder="phone"style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+            </div>
+            <div style="color:red;" *ngIf="isValidInput('phone')"
+            class="alert alert-danger">
+            <div *ngIf="walkinsForm.controls['phone'].errors.required">
+              phone is required.
+            </div>
+            <div *ngIf="walkinsForm.controls['phone'].errors.maxLength">
+             Maximum length is 10
+            </div>
+             <div *ngIf="walkinsForm.controls['phone'].errors.pattern">
+              Incorrect phone number
+             </div>
+          </div>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-label style="font-family: Arial, Helvetica, sans-serif;font-size: .9em;color:#057DCD;font-weight: bold;">Checkin </ion-label>
+              <ion-input style="width: 100%;" type="date" formControlName="checkin"  style="background-color: #E8EEF1;border-radius: 20px;" placeholder="phone"></ion-input>
+              <div style="color:red;width: 100%;" *ngIf="isValidInput('checkin')"
+              class="alert alert-danger">
+              <div *ngIf="walkinsForm.controls['checkin'].errors.required">
+                checkin is required
+              </div>
+              </div>
+            </ion-col>
+            <ion-col>
+              <ion-label style="font-family: Arial, Helvetica, sans-serif;font-size: .9em;color:#057DCD;font-weight: bold;">Timein </ion-label>
+              <ion-input style="width: 100%;" type="time" formControlName="timein" style="background-color: #E8EEF1;border-radius: 20px;" placeholder="phone"></ion-input>
+              <div style="color:red;width: 100%;" *ngIf="isValidInput('timein')"
+    class="alert alert-danger">
+    <div *ngIf="walkinsForm.controls['timein'].errors.required">
+      timein is required
+    </div>
+    </div>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-label style="font-family: Arial, Helvetica, sans-serif;font-size: .9em;color:#057DCD;font-weight: bold;">Checkout </ion-label>
+              <ion-input style="width: 100%;" type="date"  formControlName="checkout"  style="background-color: #E8EEF1;border-radius: 20px;" placeholder="phone"></ion-input>
+              <div style="color:red;width: 100%;" *ngIf="isValidInput('checkout')"
+              class="alert alert-danger">
+              <div *ngIf="walkinsForm.controls['checkout'].errors.required">
+                checkout is required
+              </div>
+              </div>
+            </ion-col>
+            <ion-col>
+              <ion-label style="font-family: Arial, Helvetica, sans-serif;font-size: .9em;color:#057DCD;font-weight: bold;">timein </ion-label>
+              <ion-input style="width: 100%;" type="time"  formControlName="timeout" style="background-color: #E8EEF1;border-radius: 20px;" placeholder="phone"></ion-input>
+              <div style="color:red;" *ngIf="isValidInput('timeout')"
+              class="alert alert-danger">
+              <div *ngIf="walkinsForm.controls['timeout'].errors.required">
+                timeout is required
+              </div>
+              </div>
+            </ion-col>
+          </ion-row>
+         <ion-row>
+           <div style="width:100%;padding-top:5%;padding-bottom:5%; ">
+            <ion-button [disabled]="!walkinsForm.valid"   (click)="walkinsBooking()"  style="width: 100%;border-radius: 10px;background-color: #1E3D58;">BOOK</ion-button>
+           </div>
+         </ion-row>
+        </ion-grid>
+    
+    </form>
+  </div>
+    </div>
+   </div>
+
+
+
+
+  <!-- -----------------------------------------
+  -----------------------------------------
+  -----------------------------------------
+   -->
+
+  <!-- <div class="top">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    
+    <h1 style="font-size: 20px; text-align: center;color: white;">Register walk-ins below</h1>
+  
+  </div>
+  <div class="curve">
+    
+  </div>
+  
+  <div class="wrapper">
+
+<form [formGroup]="walkinsForm">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+        <ion-input formControlName="name" type="text" placeholder="Name"></ion-input>
+        </ion-item>
+      </ion-col>
+      <div style="color:red;" *ngIf="isValidInput('name')"
+      class="alert alert-danger">
+      <div *ngIf="walkinsForm.controls['name'].errors.required">
+        name is required.
+      </div>
+      <div *ngIf="walkinsForm.controls['name'].errors.maxLength">
+       Maximum length is 20
+      </div>
+      <div *ngIf="walkinsForm.controls['name'].errors.minLength">
+        min length is 2
+       </div>
+       <div *ngIf="walkinsForm.controls['name'].errors.pattern">
+        Chars are not allowed
+       </div>
+    </div>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+      <ion-item>
+      <ion-input formControlName="surname" type="text" placeholder="Surname"></ion-input>
+    </ion-item>
+    </ion-col>
+      <div style="color:red;" *ngIf="isValidInput('surname')"
+      class="alert alert-danger">
+      <div *ngIf="walkinsForm.controls['surname'].errors.required">
+        surname is required.
+      </div>
+      <div *ngIf="walkinsForm.controls['surname'].errors.maxLength">
+       Maximum length is 20
+      </div>
+      <div *ngIf="walkinsForm.controls['surname'].errors.minLength">
+        min length is 2
+       </div>
+       <div *ngIf="walkinsForm.controls['surname'].errors.pattern">
+        Chars are not allowed
+       </div>
+    </div>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+      <ion-item>
+      <ion-input formControlName="email" type="email" placeholder="Email"></ion-input>
+      </ion-item>
+      </ion-col>
+      <div style="color:red;" *ngIf="isValidInput('email')"
+      class="alert alert-danger">
+      <div *ngIf="walkinsForm.controls['email'].errors.required">
+       Email is required
+      </div>
+       <div *ngIf="walkinsForm.controls['email'].errors.pattern">
+      incorrect email format
+       </div>
+      </div>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+      <ion-item>
+      <ion-input formControlName="phone" type="number" placeholder="Phone"></ion-input>
+      </ion-item>
+      </ion-col>
+      <div style="color:red;" *ngIf="isValidInput('phone')"
+      class="alert alert-danger">
+      <div *ngIf="walkinsForm.controls['phone'].errors.required">
+        phone is required.
+      </div>
+      <div *ngIf="walkinsForm.controls['phone'].errors.maxLength">
+       Maximum length is 10
+      </div>
+       <div *ngIf="walkinsForm.controls['phone'].errors.pattern">
+        Incorrect phone number
+       </div>
+    </div>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+      <ion-input formControlName="checkin" type="date" placeholder="checkin"></ion-input>
+      <div style="color:red;" *ngIf="isValidInput('checkin')"
+      class="alert alert-danger">
+      <div *ngIf="walkinsForm.controls['checkin'].errors.required">
+        checkin is required
+      </div>
+      </div>
+    </ion-col>
+    <ion-col>
+      
+      <ion-input formControlName="timein" type="time" placeholder="timein" ></ion-input>
+    </ion-col>
+    <div style="color:red;" *ngIf="isValidInput('timein')"
+    class="alert alert-danger">
+    <div *ngIf="walkinsForm.controls['timein'].errors.required">
+      timein is required
+    </div>
+    </div>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+   
+      <ion-input formControlName="checkout"  type="date"></ion-input>
+      <div style="color:red;" *ngIf="isValidInput('checkout')"
+      class="alert alert-danger">
+      <div *ngIf="walkinsForm.controls['checkout'].errors.required">
+        checkout is required
+      </div>
+      </div>
+    </ion-col>
+    <ion-col>
+    
+      <ion-input formControlName="timeout" type="time" placeholder="timeout" ></ion-input>
+      <div style="color:red;" *ngIf="isValidInput('timeout')"
+      class="alert alert-danger">
+      <div *ngIf="walkinsForm.controls['timeout'].errors.required">
+        timeout is required
+      </div>
+      </div>
+    </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-button [disabled]="!walkinsForm.valid"   (click)="walkinsBooking()" expand="full">BOOK</ion-button>
+    </ion-row>
+  </ion-grid>
+  
+  
+</form> -->
+
+<!-- [disabled]="!walkinsForm.valid" -->
+
+<!-- </div> -->
+
+</ion-content>

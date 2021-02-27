@@ -1,0 +1,565 @@
+<!-- <ion-buttons slot="start">
+    <ion-back-button defaultHref="/"></ion-back-button>
+  </ion-buttons> -->
+
+<ion-content style="background-image: url(../assets/background2.png)">
+
+
+    
+     <div  *ngIf="editForm==false;else loggedOut" style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+        <div style="height: 100%;width: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;" >
+      <div>
+        <ion-grid style="padding-top:10%;padding-bottom:0%;">
+            <ion-row>
+                <ion-buttons style="color:#1E3D58" >
+                  <ion-back-button defaultHref="/"></ion-back-button>
+                </ion-buttons>
+              </ion-row>
+          <ion-row><h1 style="font-family: Arial, Helvetica, sans-serif;color:#1E3D58 ;">Create Profile</h1></ion-row>
+        </ion-grid>
+      </div>
+          <div style="border:1px solid white;bottom:0%;;position:relative;height: 70%;overflow: scroll;">
+            <form *ngIf="editForm==false;else loggedOut" [formGroup]="updateForm" type="text" style="width: 100%;position: absolute;top: 0%;height: 80%;">
+            <ion-grid  style="width: 100%;">
+              <ion-row>
+                <div style="padding-bottom: 2%;width: 100%;">
+                  <ion-input style="width: 100%;" type="text" formControlName="company_name" placeholder="Company Name" style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+                </div>
+                <div style="color:red;" *ngIf="isValidInput('company_name')" class="alert alert-danger">
+                    <div *ngIf="updateForm.controls['company_name'].errors.required">
+                        company name is required.
+                    </div>
+                    <div *ngIf="updateForm.controls['company_name'].errors.maxLength">
+                        Maximum length is 20
+                    </div>
+                    <div *ngIf="updateForm.controls['company_name'].errors.minLength">
+                        min length is 2
+                    </div>
+
+                </div>
+              </ion-row>
+              <ion-row>
+                <div style="padding-bottom: 2%;width: 100%;">
+                  <ion-input style="width: 100%;" type="email" formControlName="company_emaile" placeholder="Email" style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+                </div>
+                <div style="color:red;" *ngIf="isValidInput('company_emaile')" class="alert alert-danger">
+                    <div *ngIf="updateForm.controls['company_emaile'].errors.required">
+                        Email is required
+                    </div>
+                    <div *ngIf="updateForm.controls['company_emaile'].errors.pattern">
+                        incorrect email format
+                    </div>
+                </div>
+              </ion-row>
+              <ion-row>
+                <div style="padding-bottom: 2%;width: 100%;">
+                  <ion-input style="width: 100%;" type="number" formControlName="company_tel" placeholder="Telephone" style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+                </div>
+                <div style="color:red;width:100%;" *ngIf="isValidInput('company_tel')" class="alert alert-danger">
+                    <div *ngIf="updateForm.controls['company_tel'].errors.required">
+                        phone is required.
+                    </div>
+                    <div *ngIf="updateForm.controls['company_tel'].errors.maxLength">
+                        Maximum length is 10
+                    </div>
+                    <div *ngIf="updateForm.controls['company_tel'].errors.pattern">
+                        Incorrect phone number
+                    </div>
+                </div>
+              </ion-row>
+              <ion-row>
+                <div style="padding-bottom: 2%;width: 100%;">
+                  <ion-input style="width: 100%;" type="number" formControlName="company_website" placeholder="Website" style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+                </div>
+              </ion-row>
+              <ion-row>
+                <ion-textarea placeholder="Address" type="text" formControlName="company_address" style="background-color: #E8EEF1;border-radius: 5px">
+                </ion-textarea>
+                <div style="color:red;width: 100%;" *ngIf="isValidInput('company_address')" class="alert alert-danger">
+                    <div *ngIf="updateForm.controls['company_address'].errors.required">
+                        company address is required.
+                    </div>
+                </div>
+              </ion-row>
+              <ion-row>
+                <div style="padding-bottom: 2%;width: 100%;padding-top: 2%;">
+                <ion-textarea placeholder="About Us" type="text" formControlName="aboutus" style="background-color: #E8EEF1;border-radius: 5px">
+                </ion-textarea>
+              </div>
+              <div style="color:red;" *ngIf="isValidInput('aboutus')" class="alert alert-danger">
+                <div *ngIf="updateForm.controls['aboutus'].errors.required">
+                    description is required.
+                </div>
+                <div *ngIf="updateForm.controls['aboutus'].errors.maxLength">
+                    Maximum length is 20
+                </div>
+                <div *ngIf="updateForm.controls['aboutus'].errors.minLength">
+                    min length is 2
+                </div>
+            </div>
+              </ion-row>
+              <ion-row>
+                <div style="padding-bottom: 2%;width: 100%;">
+                  <ion-input type="file" required name="img" accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+                </div>
+                <div>
+                    <div style="color:red;" *ngIf=" this.imageError!==''">{{this.imageError}}</div>
+                </div>
+               
+              </ion-row>
+          <ion-row>       
+                <ion-col style="width:100%; ">
+                 <div style="width:100%;padding-top:1%;padding-bottom:5%;right: -13px;position: absolute; ">
+                   <ion-button  (click)="submit()" style="color:white; width: 100%;--border-radius: 20px;--background: #59981A;height: 50px;font-weight: bold;">SUBMIT</ion-button>
+                  </div>
+                </ion-col>
+                <ion-col>
+                <div style="width:100%;padding-top:1%;padding-bottom:5%;position: absolute;left: -15px; ">
+                 <ion-button  (click)="update()" style="width: 100%;--border-radius: 20px;--background: #F8D210;height: 50px;color:black">EDIT</ion-button>
+                </div>
+              </ion-col>
+                </ion-row>
+            </ion-grid>
+        </form>
+          </div> 
+        </div>
+       </div> 
+
+       
+
+
+
+
+
+
+
+       
+       <ng-template #loggedOut>
+
+
+
+      
+
+       <div style="border: 1px solid white;height: 100%;  background-image: url(../assets/background2.png)">
+        <div style="height: 100%;width: 100%; border: 1px solid white;background-color: white;bottom: 0%;left: 0;position: absolute;border-top-right-radius:20%;" >
+      <div>
+        <ion-grid style="padding-top:10%;padding-bottom:0%;">
+            <!-- <ion-row>
+                <ion-buttons style="color:#1E3D58" >
+                  <ion-back-button defaultHref="/"></ion-back-button>
+                </ion-buttons> 
+              </ion-row> -->
+          <ion-row><h1 style="font-family: Arial, Helvetica, sans-serif;color:#1E3D58 ;">Edit Profile</h1></ion-row>
+        </ion-grid>
+      </div>
+          <div style="border:1px solid white;bottom:0%;;position:relative;height: 70%;overflow: scroll;">
+            <form #editForm="ngForm" *ngFor="let x of array" type="text" style="width: 100%;position: absolute;top: 0%;height: 80%;">
+            <ion-grid  style="width: 100%;">
+                <ion-row>
+                    <div style="font-family: Arial, Helvetica, sans-serif;font-size: 1em;color:#057DCD;font-weight: bold;padding-top: 1%;padding-bottom: 1%;">
+                      <b>Change Profile Picture</b>
+                    </div>
+                  </ion-row>
+                <ion-row>
+                    <ion-col>
+                      <div style="padding-bottom: 2%;width: 100%;">
+                          <ion-input style="width: 100%;" type="file"required name="img" accept="image/*" id="upload" (change)="fileChangeEvent($event)" style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+                        </div>
+                        <div>
+                            <div style="color:red;width:100%;" *ngIf=" this.imageError!==''">{{this.imageError}}</div>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                      <div style="width: 100%;"> <ion-button style="width:100%"  color="primary" (click)="changeImage()">Upload</ion-button></div>
+                    </ion-col>
+                 </ion-row>
+                <ion-row>
+                  <div>
+                      <div style="color:red;" *ngIf=" this.imageError!==''">{{this.imageError}}</div>
+                  </div>
+                </ion-row>
+              <ion-row>
+                <div style="padding-bottom: 2%;width: 100%;">
+                  <ion-input  type="text" [(ngModel)]="company_name_" name="company_name" required minlength="2" pattern="^[a-zA-Z]+$" #company_name="ngModel" placeholder="Company name.."  placeholder="Company Name" style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+                </div>
+                <div style="color:red;" *ngIf="!company_name?.valid && (company_name?.dirty || company_name?.touched)">
+                    Invalid First company_name_
+                    <div *ngIf="company_name.errors.required">
+                        company_name_ is required
+                    </div>
+                    <div *ngIf="company_name.errors.minlength">
+                        First Name Minimum Length is {{company_name.errors.minlength?.requiredLength}}
+                    </div>
+                </div>
+              </ion-row>
+              <ion-row>
+                <div style="padding-bottom: 2%;width: 100%;">
+                  <ion-input style="width: 100%;" type="email" placeholder="Email"  [(ngModel)]="company_emaile_" name="company_emaile" required email #company_emaile="ngModel" style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+                </div>
+                <div style="color:red;width:100%;" *ngIf="!company_emaile?.valid && (company_emaile?.dirty || company_emaile?.touched)">
+                    Invalid email
+                    <div *ngIf="company_emaile.errors.required">
+                        email is required
+                    </div>
+                    <div *ngIf="company_emaile.errors.email">
+                        Email format incorrect
+                    </div>
+                    <div style="color:red;width:100%;" *ngIf="!company_tel?.valid && (company_tel?.dirty || company_tel?.touched)">
+                        Invalid phone
+                        <div *ngIf="company_tel.errors.required">
+                            phone is required
+                        </div>
+                        <div *ngIf="company_tel.errors.maxlength">
+                            maxlength is 10
+                        </div>
+
+                    </div>
+                </div>
+              </ion-row>
+              <ion-row>
+                <div style="padding-bottom: 2%;width: 100%;">
+                  <ion-input style="width: 100%;" type="number" placeholder="Telephone" [(ngModel)]="company_tel_" name="company_tel" required maxlength="10" #company_tel="ngModel" style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+                </div>
+                <div style="color:red;width:100%;" *ngIf="!company_tel?.valid && (company_tel?.dirty || company_tel?.touched)">
+                    Invalid phone
+                    <div *ngIf="company_tel.errors.required">
+                        phone is required
+                    </div>
+                    <div *ngIf="company_tel.errors.maxlength">
+                        maxlength is 10
+                    </div>
+
+                </div>
+              </ion-row>
+              <ion-row>
+                <div style="padding-bottom: 2%;width: 100%;">
+                  <ion-input style="width: 100%;" type="text" placeholder="Website.." [(ngModel)]="company_website_" name="company_website_" style="background-color: #E8EEF1;border-radius: 20px;"></ion-input>
+                </div>
+              </ion-row>
+              <ion-row>
+                <ion-textarea placeholder="Address" type="text" [(ngModel)]="company_address_" required maxlength="100" #company_address="ngModel" name="company_address" style="background-color: #E8EEF1;border-radius: 5px">
+                </ion-textarea>
+                <div style="color:red;width:100%;" *ngIf="!company_address?.valid && (company_address?.dirty || company_address?.touched)">
+                    Invalid address
+                    <div *ngIf="company_address.errors.required">
+                        address is required
+                    </div>
+                    <div *ngIf="company_address.errors.maxlength">
+                        maxlength is 100
+                    </div>
+
+                </div>
+              </ion-row>
+              <ion-row>
+                <div style="padding-bottom: 2%;width: 100%;padding-top: 1%;">
+                <ion-textarea placeholder="Description" [(ngModel)]="aboutus_" name="aboutus" required maxlength="150" minlength="5" #aboutus="ngModel" style="background-color: #E8EEF1;border-radius: 5px">
+                </ion-textarea>
+              </div>
+              <div style="color:red;width:100%;" *ngIf="!aboutus?.valid && (aboutus?.dirty || aboutus?.touched)">
+                Invalid about us
+                <div *ngIf="aboutus.errors.required">
+                    about us is required
+                </div>
+                <div *ngIf="aboutus.errors.maxlength">
+                    maxlength is 150
+                </div>
+                <div *ngIf="aboutus.errors.minlength">
+                    minlength is 5
+                </div>
+               </div>
+              </ion-row>
+             
+            
+            </ion-grid>
+            <ion-grid> 
+                <ion-row>
+                
+                    <ion-col style="width:100%; ">
+                     <div style="width:100%;padding-top:1%;padding-bottom:1%;right: -13px;position: absolute; ">
+                       <ion-button (click)=" editForms()"  style="color:white; width: 100%;--border-radius: 20px;--background: #54a304;height: 50px;font-weight: bold;">SUBMIT</ion-button>
+                      </div>
+                    </ion-col>
+                    <ion-col>
+                    <div style="width:100%;padding-top:1%;padding-bottom:1%;position: absolute;left: -15px; ">
+                     <ion-button (click)=" editAll()"  style="width: 100%;--border-radius: 20px;--background: #F51720;height: 50px;color:white">CLOSE</ion-button>
+                    </div>
+                  </ion-col>
+                    </ion-row>
+            </ion-grid>
+        </form>
+          </div>
+        </div>
+       </div>
+
+    </ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    -----------------------------------------
+    ------------------------------------------
+    ----------------------------------------- -->
+     <!-- <div class="holder">
+       <div class="image">
+            <ion-buttons style="background-color: #D8CDC7;" slot="start">
+                <ion-back-button defaultHref="/"></ion-back-button>
+            </ion-buttons>
+            <img src="assets/back.jpg">
+        </div> -->
+        <!-- <ion-icon style="position: absolute;left:3%;font-size: 30px;top: 15%;color: #303d3d;" name="images-outline"></ion-icon> -->
+        <!-- <div class="top">
+    
+    </div> -->
+        <!-- <ion-button style="position: absolute;top: 15%;right: 5%;height: 20px;--background:rgb(224, 18, 53);"> Submit</ion-button> -->
+        <!-- <div style="position: absolute;width: 6.5%;height: 4%; border-radius: 50%; background-color:white;top: 15%;left: 1%; display: flex;justify-content: center;align-items: center;">
+    <ion-icon style="font-size: 20px;color: white;background-color: #16D6E3; border-radius: 50%;" name="add-circle-outline"></ion-icon>
+  </div> -->
+        <!-- <ion-icon style="font-size: 50px; position: absolute;top: 20%;right: 5%;color:red;" name="add-circle-outline"></ion-icon> -->
+        <!-- <div class="bottom">
+            <p style="font-size:22px;font-weight: bolder;position: absolute;top: 0%;left: 5%;color: #2D98E6;">Profile</p>
+
+            <form *ngIf="editForm==false;else loggedOut" [formGroup]="updateForm" type="text" style="width: 100%;position: absolute;top: 15%;height: 80%;">
+
+                <ion-item>
+                    <ion-input type="text" formControlName="company_name" placeholder="Company name"></ion-input>
+                    <div style="color:red;" *ngIf="isValidInput('company_name')" class="alert alert-danger">
+                        <div *ngIf="updateForm.controls['company_name'].errors.required">
+                            company name is required.
+                        </div>
+                        <div *ngIf="updateForm.controls['company_name'].errors.maxLength">
+                            Maximum length is 20
+                        </div>
+                        <div *ngIf="updateForm.controls['company_name'].errors.minLength">
+                            min length is 2
+                        </div>
+
+                    </div>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input type="text" formControlName="company_address" placeholder="Address"></ion-input>
+                    <div style="color:red;" *ngIf="isValidInput('company_address')" class="alert alert-danger">
+                        <div *ngIf="updateForm.controls['company_address'].errors.required">
+                            company address is required.
+                        </div>
+                    </div>
+                </ion-item>
+
+
+                <ion-item>
+                    <ion-input type="text" formControlName="company_emaile" placeholder="Email"></ion-input>
+                    <div style="color:red;" *ngIf="isValidInput('company_emaile')" class="alert alert-danger">
+                        <div *ngIf="updateForm.controls['company_emaile'].errors.required">
+                            Email is required
+                        </div>
+                        <div *ngIf="updateForm.controls['company_emaile'].errors.pattern">
+                            incorrect email format
+                        </div>
+                    </div>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input type="text" formControlName="company_tel" placeholder="Telephone"></ion-input>
+                    <div style="color:red;" *ngIf="isValidInput('company_tel')" class="alert alert-danger">
+                        <div *ngIf="updateForm.controls['company_tel'].errors.required">
+                            phone is required.
+                        </div>
+                        <div *ngIf="updateForm.controls['company_tel'].errors.maxLength">
+                            Maximum length is 10
+                        </div>
+                        <div *ngIf="updateForm.controls['company_tel'].errors.pattern">
+                            Incorrect phone number
+                        </div>
+                    </div>
+                </ion-item>
+
+                <ion-item>
+                    <ion-input type="text" formControlName="company_website" placeholder="Website"></ion-input>
+                </ion-item>
+
+                <ion-textarea type="text" formControlName="aboutus" placeholder="Description" style="border-style: solid;height: 15%;border-width: 1px;border-color: #16D6E3; border-top: 0px;margin: 0px;"></ion-textarea>
+                <div style="color:red;" *ngIf="isValidInput('aboutus')" class="alert alert-danger">
+                    <div *ngIf="updateForm.controls['aboutus'].errors.required">
+                        description is required.
+                    </div>
+                    <div *ngIf="updateForm.controls['aboutus'].errors.maxLength">
+                        Maximum length is 20
+                    </div>
+                    <div *ngIf="updateForm.controls['aboutus'].errors.minLength">
+                        min length is 2
+                    </div>
+                </div>
+
+                <ion-input type="file" required name="img" accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+                <div>
+                    <div style="color:red;" *ngIf=" this.imageError!==''">{{this.imageError}}</div>
+                </div> -->
+
+                <!-- <div *ngFor="let cartoon of cartoonsData">
+    <input type="checkbox"    (change)="onChange(cartoon.name, $event.target.checked)" />
+    {{ cartoon.name }}
+  </div> -->
+                <!-- <p style="font-size:18px; color: black;font-weight: bold; margin-left: 10px;">Select Amenities</p>
+                <ion-grid>
+                    <ion-row style="color: black;margin: 5px;">
+                        <ion-col *ngFor="let cartoon of cartoonsData">
+                            <div style="font-size: 14px;">{{ cartoon.name }} <br>
+                                <input type="checkbox" formControlName="nameAnim" (change)="onChange(cartoon.name, $event.target.checked)" />
+                            </div>
+                        </ion-col>
+                        <div style="color:red;" *ngIf="isValidInput('nameAnim')" class="alert alert-danger">
+                            <div *ngIf="updateForm.controls['nameAnim'].errors.required">
+                                Atleast one Amenity should be selected
+                            </div>
+
+                        </div>
+                    </ion-row>
+                </ion-grid>
+                <ion-button (click)="submit()" expand="full" class="submit">Submit</ion-button>
+                <ion-button (click)="update()" expand="full" class="edit">Edit</ion-button>
+                <br><br><br><br><br>
+            </form>
+            <ng-template #loggedOut>
+                <form #editForm="ngForm" *ngFor="let x of array" type="text" style="width: 100%;position: absolute;top: 15%;height: 80%;">
+
+                    <ion-item>
+                        <ion-input type="text" [(ngModel)]="company_name_" name="company_name" required minlength="2" pattern="^[a-zA-Z]+$" #company_name="ngModel" placeholder="Company name..">
+                        </ion-input>
+                        <div style="color:red;" *ngIf="!company_name?.valid && (company_name?.dirty || company_name?.touched)">
+                            Invalid First company_name_
+                            <div *ngIf="company_name.errors.required">
+                                company_name_ is required
+                            </div>
+                            <div *ngIf="company_name.errors.minlength">
+                                First Name Minimum Length is {{company_name.errors.minlength?.requiredLength}}
+                            </div>
+                        </div>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input type="text" placeholder="Address" [(ngModel)]="company_address_" required maxlength="100" #company_address="ngModel" name="company_address">
+                        </ion-input>
+                        <div style="color:red;" *ngIf="!company_address?.valid && (company_address?.dirty || company_address?.touched)">
+                            Invalid address
+                            <div *ngIf="company_address.errors.required">
+                                address is required
+                            </div>
+                            <div *ngIf="company_address.errors.maxlength">
+                                maxlength is 100
+                            </div>
+
+                        </div>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input type="text" placeholder="Email" [(ngModel)]="company_emaile_" name="company_emaile" required email #company_emaile="ngModel">
+                        </ion-input>
+                        <div style="color:red;" *ngIf="!company_emaile?.valid && (company_emaile?.dirty || company_emaile?.touched)">
+                            Invalid email
+                            <div *ngIf="company_emaile.errors.required">
+                                email is required
+                            </div>
+                            <div *ngIf="company_emaile.errors.email">
+                                Email format incorrect
+                            </div>
+                        </div>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input type="text" placeholder="Telephone" [(ngModel)]="company_tel_" name="company_tel" required maxlength="10" #company_tel="ngModel">
+
+                        </ion-input>
+                        <div style="color:red;" *ngIf="!company_tel?.valid && (company_tel?.dirty || company_tel?.touched)">
+                            Invalid phone
+                            <div *ngIf="company_tel.errors.required">
+                                phone is required
+                            </div>
+                            <div *ngIf="company_tel.errors.maxlength">
+                                maxlength is 10
+                            </div>
+
+                        </div>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input type="text" placeholder="Website" [(ngModel)]="company_website_" name="company_website_">
+                        </ion-input>
+                    </ion-item>
+                    <ion-textarea type="text" placeholder="Description" [(ngModel)]="aboutus_" name="aboutus" required maxlength="150" minlength="5" #aboutus="ngModel" style="border-style: solid;height: 15%;border-width: 1px;border-color:#16D6E3;border-top: 0px;margin: 0px;"></ion-textarea>
+                    <div style="color:red;" *ngIf="!aboutus?.valid && (aboutus?.dirty || aboutus?.touched)">
+                        Invalid about us
+                        <div *ngIf="aboutus.errors.required">
+                            about us is required
+                        </div>
+                        <div *ngIf="aboutus.errors.maxlength">
+                            maxlength is 150
+                        </div>
+                        <div *ngIf="aboutus.errors.minlength">
+                            minlength is 5
+                        </div>
+
+                    </div>
+
+
+                    <ion-input type="file" required name="img" accept="image/*" id="upload" (change)="fileChangeEvent($event)"></ion-input>
+                    <div>
+                        <div style="color:red;" *ngIf=" this.imageError!==''">{{this.imageError}}</div>
+                    </div>
+                    <button class="profile" style="background-color:#c788f7; text-align: center; margin-left: 10px;" (click)="changeImage()">Change Profile</button>
+
+
+
+
+                    <p style="font-size:18px; color: black; font-weight: bold; margin-left: 20px;">Amenities</p>
+                    <ion-item>
+                        <ion-grid>
+                            <ion-row style="color: black;margin: 5px;">
+
+
+                                <ion-col *ngFor="let xx of x.outside_features">
+                                    <div class="circles" style="font-size: 14px;">{{ xx }} <br>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-item>
+                    <ion-item>
+                        <ion-grid>
+                            <ion-row>
+                                <p style="font-size:18px; color: black; font-weight: bold;">Update Amenities</p>
+                            </ion-row>
+                            <ion-row style="color: black;margin: 5px;">
+                                <ion-col *ngFor="let cartoon of cartoonsData">
+                                    <div style="font-size: 14px;">{{ cartoon.name }} <br>
+                                        <input type="checkbox" (change)="onChange(cartoon.name, $event.target.checked)" />
+                                    </div>
+                                </ion-col>
+
+                            </ion-row>
+                        </ion-grid>
+                    </ion-item> -->
+                    <!-- [disabled]="!editForm.valid"  -->
+                    <!-- <ion-item>
+                        <ion-button (click)=" editForms()" expand="full" class="edit2">Edit</ion-button>
+                        <ion-button (click)=" editAll()" expand="full" class="editall">Edit All</ion-button>
+                    </ion-item>
+
+
+
+                    <br><br><br><br><br>
+                </form>
+
+
+            </ng-template>
+
+        </div>
+    </div> -->
+</ion-content>
