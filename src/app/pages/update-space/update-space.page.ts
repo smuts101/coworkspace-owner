@@ -365,7 +365,7 @@ CreatePopover()
 
 //////////////Geolocation and Geocode//////////
 async geocode() {
-  //this.ownerservice.geoCodeLocation(this.account.getUserSession(), this.ownerservice.getWorkSpaceUID(),this.spaceUid,-26.269212999999997,27.790485)
+  this.ownerservice.geoCodeLocation(this.account.getUserSession(), this.ownerservice.getWorkSpaceUID(),this.spaceUid,-26.269212999999997,27.790485)
   if (this.addressLocation != "") {
 
     let options: NativeGeocoderOptions = {

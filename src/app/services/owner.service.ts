@@ -159,7 +159,7 @@ export class OwnerServiceService {
 
 
 
-  async addcoworkingSpace(profiles_uid,profile_uid,categories,category_number,address,city,province,amenities,image,price,description) {
+  async addcoworkingSpace(profiles_uid,profile_uid,categories,category_number,address,city,province,amenities,image,price,description,lat,lng) {
     // const loading = await this.loadingCtrl.create();
     this.addSpace();
     var db = firebase.firestore();
@@ -178,6 +178,8 @@ export class OwnerServiceService {
           image:image,
           price:price,
           description: description,
+          lat:lat,
+          lng:lng
           
         }).catch((error) => {
           this._error = error.message;

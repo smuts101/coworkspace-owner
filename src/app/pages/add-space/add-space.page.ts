@@ -16,6 +16,15 @@ import { MassegesPage } from 'src/app/feedback/masseges/masseges.page';
 import {  LoadingController,AlertController } from '@ionic/angular';
 
 
+//////////////Geolocation and Geocode//////////
+import { Plugins } from '@capacitor/core';
+const { Geolocation, Toast } = Plugins;
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+
+
+
+
+
 
 export interface amenities {
   id: number;
@@ -65,11 +74,15 @@ export class AddSpacePage implements OnInit {
   viewSpace = 0; 
   spaces:any=[]
   spacesT:any=[]
+//////////////Geolocation and Geocode//////////
+public lat: any;
+public lng: any;
+showingCurrent: boolean = true;
 
 
 
   spacesTT:any=[]
-  constructor(private popover:PopoverController,private formBuilder:FormBuilder,public ownerservice:OwnerServiceService,public account:SignInSignUpService,public loadingCtrl: LoadingController, private router: Router,private alertCtrl: AlertController) { 
+  constructor(private nativeGeocoder: NativeGeocoder, private ngZone: NgZone,private popover:PopoverController,private formBuilder:FormBuilder,public ownerservice:OwnerServiceService,public account:SignInSignUpService,public loadingCtrl: LoadingController, private router: Router,private alertCtrl: AlertController) { 
     
     firebase.firestore().collection("profiles")
                         .doc(this.account.getUserSession())
@@ -86,6 +99,7 @@ export class AddSpacePage implements OnInit {
   }
 
   addCoSpaceForm = this.formBuilder.group({
+    addressLocation: ['', Validators.required],
     categories: ['', Validators.required],
     category_number:  ['', Validators.required],
     address: ['', [Validators.required]],
@@ -100,6 +114,9 @@ export class AddSpacePage implements OnInit {
 isValidInput(fieldName): boolean {
   return this.addCoSpaceForm.controls[fieldName].invalid &&
     (this.addCoSpaceForm.controls[fieldName].dirty || this.addCoSpaceForm.controls[fieldName].touched);
+}
+get addressLocation() {
+  return this.addCoSpaceForm.get("addressLocation");
 }
 get description() {
   return this.addCoSpaceForm.get("description");
@@ -130,6 +147,9 @@ get name() {
 
 
 public errorMessages = {
+  addressLocation: [
+    { type: 'required', message: 'addressLocation is required' }
+  ],
   price: [
     { type: 'required', message: 'price is required' }
   ],
@@ -209,7 +229,29 @@ fileChangeEvent(fileInput: any) {
   }
 
   submit() {
-//console.log(this.addCoSpaceForm.value.name) 
+    this.ownerservice. addcoworkingSpace(this.account.getUserSession(),this.profileUid,
+    this.addCoSpaceForm.value.categories,
+    this.addCoSpaceForm.value.category_number,
+    this.addCoSpaceForm.value.address,
+    this.addCoSpaceForm.value.city,
+    this.addCoSpaceForm.value.province,
+    this.addCoSpaceForm.value.name,
+    this.cardImageBase64,
+    this.addCoSpaceForm.value.price,
+   this.addCoSpaceForm.value.description,-26.269212999999997,27.790485
+   ) 
+
+
+    /****************************** */
+    let options: NativeGeocoderOptions = {
+      useLocale: true,
+      maxResults: 5
+    };
+    this.nativeGeocoder.forwardGeocode(this.addressLocation.value, options)
+      .then((result: NativeGeocoderResult[]) => {
+        this.ngZone.run(() => {
+          this.lat = parseFloat(result[0].latitude);
+          this.lng = parseFloat(result[0].longitude);
   this.ownerservice. addcoworkingSpace(this.account.getUserSession(),this.profileUid,
                                        this.addCoSpaceForm.value.categories,
                                        this.addCoSpaceForm.value.category_number,
@@ -219,9 +261,14 @@ fileChangeEvent(fileInput: any) {
                                        this.addCoSpaceForm.value.name,
                                        this.cardImageBase64,
                                        this.addCoSpaceForm.value.price,
-                                      this.addCoSpaceForm.value.description) 
-    // this.reload();
-                                      //  this.  CreatePopover()
+                                      this.addCoSpaceForm.value.description,
+                                      this.lat,
+                                      this.lng 
+                                      ) 
+                                    })
+                                    this.showingCurrent = false;
+                                  })
+                                  .catch((error: any) => console.log(error));
   }
 
     // async reload() {
@@ -283,6 +330,17 @@ returnUniq(){
       popoverElement.present();
     })
   }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

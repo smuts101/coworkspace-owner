@@ -8,17 +8,7 @@
             <ion-menu-toggle>
               <ion-item [routerLink]="'/profile'">
                 <ion-icon style="font-size: 30px; color: black;" name="person-circle-outline"></ion-icon>
-                Charmaine</ion-item>
-            </ion-menu-toggle>
-            <ion-menu-toggle>
-              <ion-item [routerLink]="'/owner-landing'">
-                <ion-icon style="font-size: 30px; color: black;" name="home-outline"></ion-icon>
-                Home</ion-item>
-            </ion-menu-toggle>
-            <ion-menu-toggle>
-              <ion-item [routerLink]="'/walkins'">
-                <ion-icon style="font-size: 30px; color: black;" name="walk-outline"></ion-icon>
-                Walkins</ion-item>
+                Profile</ion-item>
             </ion-menu-toggle>
             <ion-menu-toggle>
               <ion-item (click)="logout()">
@@ -29,7 +19,7 @@
           <!-- </div> -->
           </ion-content>
           </ion-menu>
-          <ion-menu-controller></ion-menu-controller>
+          <!-- <ion-menu-controller></ion-menu-controller> -->
 
   <ion-router-outlet id="menuContent"></ion-router-outlet>
 </ion-app>
